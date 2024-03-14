@@ -2,8 +2,9 @@
 mims_product_service
 
 # Documentation 
-http://localhost:9091/mims-product-service/v3/api-docs
+#Api Docs
 http://localhost:9091/mims-product-service/api-docs
+#Swagger Ui
 http://localhost:9091/mims-product-service/swagger-ui/index.html
 
 # H2 DB Console
