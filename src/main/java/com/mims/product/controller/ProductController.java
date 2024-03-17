@@ -56,7 +56,7 @@ public class ProductController {
 				HttpHeaders headers = new HttpHeaders();
 				headers.add("Success", "Products not found");
 				return new ResponseEntity<>(products, headers, HttpStatus.NOT_FOUND);
-			}		
+			}
 			responseEnitity = new ResponseEntity<>(products, HttpStatus.OK);
 		} catch (Exception ex) {
 			responseEnitity = ResponseEntity.badRequest().header("Failure", ex.getMessage()).body(null);
@@ -99,9 +99,9 @@ public class ProductController {
 		}
 		return responseEnitity;
 	}
-	
+
 	@GetMapping
-	public ResponseEntity<List<Product>> getProduct(@RequestParam String name,@RequestParam String brand) {
+	public ResponseEntity<List<Product>> getProduct(@RequestParam String name, @RequestParam String brand) {
 		logger.info("-- Request for fetching the product by name and brand --");
 		ResponseEntity<List<Product>> responseEnitity = null;
 		try {
@@ -132,7 +132,7 @@ public class ProductController {
 		}
 		return responseEnitity;
 	}
-	
+
 	@DeleteMapping("/{productId}")
 	public ResponseEntity<String> deleteUser(@PathVariable("productId") int product_Id) {
 		logger.info("-- Request for deleting the Product --");
@@ -140,11 +140,13 @@ public class ProductController {
 		try {
 			boolean productDeleted = productService.deleteProduct(product_Id);
 			if (!productDeleted) {
-				return ResponseEntity.notFound().header("Success", "Product not found with productId :" + product_Id).build();
-			}
-			HttpHeaders headers = new HttpHeaders();
-			headers.add("Success", "Product has been deleted");
-			responseEnitity = new ResponseEntity<>("Product with productId :" + product_Id + " has been deleted", headers, HttpStatus.OK);
+				HttpHeaders headers = new HttpHeaders();
+				headers.add("Success", "Product has been deleted");
+				responseEnitity = new ResponseEntity<>("Product with productId :" + product_Id + " has been deleted",
+						headers, HttpStatus.OK);
+			} else
+				return ResponseEntity.notFound().header("Success", "Product not found with productId :" + product_Id)
+						.build();
 		} catch (Exception ex) {
 			responseEnitity = ResponseEntity.badRequest().header("Failure", ex.getMessage()).body(null);
 		}
