@@ -123,7 +123,7 @@ public class ProductController {
 		logger.info("-- Request for updating the Product --");
 		ResponseEntity<Product> responseEnitity = null;
 		try {
-			Product productResponse = productService.saveProduct(product);
+			Product productResponse = productService.updateProduct(product);
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Success", "Product has been updated");
 			responseEnitity = new ResponseEntity<>(productResponse, headers, HttpStatus.CREATED);
